@@ -1,5 +1,14 @@
 # MarsRobotMovement
 
+1) First clone/ Download the repo
+2) Open Solution in VS
+3) First Clear and then build the MarsRobotMovementTest Project
+4) Secondly Clear and then build the MarsRobotMovement Project
+5) Then Build the Mian Solution and Run and Test
+
+
+
+
 You need to develop a robot that will navigate on Mars terrain.
 
 The input of the app will be a series of commands to move the robot on the plateau. Mars plateau is a grid defined by the initial input of the app, such as 5x5, 3x4, etc.
