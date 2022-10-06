@@ -13,7 +13,7 @@ namespace MarsRobotMovement
 
     public interface IPosition
     {
-        void StartMoving(List<int> maxPoints, string moves);
+        void StartToMove(List<int> maxPoints, string moves);
     }
 
     public class Position : IPosition
@@ -24,11 +24,12 @@ namespace MarsRobotMovement
 
         public Position()
         {
-            X = Y = 0;
+            X = 1;
+            Y = 1;
             Direction = Directions.North;
         }
 
-        private void Rotate90Left()
+        private void MoveInL_Direction()
         {
             switch (this.Direction)
             {
@@ -49,7 +50,7 @@ namespace MarsRobotMovement
             }
         }
 
-        private void Rotate90Right()
+        private void MoveInR_Direction()
         {
             switch (this.Direction)
             {
@@ -70,7 +71,7 @@ namespace MarsRobotMovement
             }
         }
 
-        private void MoveInSameDirection()
+        private void MoveInF_Direction()
         {
             switch (this.Direction)
             {
@@ -91,33 +92,32 @@ namespace MarsRobotMovement
             }
         }
 
-        public void StartMoving(List<int> maxPoints, string moves)
+        public void StartToMove(List<int> maxPoints, string moves)
         {
             foreach (var move in moves)
             {
-                switch (move)
+                // If the robot reaches the limits of the plateau the command must be ignored
+                if (this.X > 0 && this.X < maxPoints[0] && this.Y > 0 && this.Y < maxPoints[1])
                 {
-                    case 'F':
-                    case 'f':
-                        this.MoveInSameDirection();
-                        break;
-                    case 'L':
-                    case 'l':
-                        this.Rotate90Left();
-                        break;
-                    case 'R':
-                    case 'r':
-                        this.Rotate90Right();
-                        break;
-                    default:
-                        Console.WriteLine($"Invalid Character {move}");
-                        Console.WriteLine($"Suggestion : Only used these 3 Charters [ F , L , R ] ");
-                        break;
-                }
-
-                if (this.X < 0 || this.X > maxPoints[0] || this.Y < 0 || this.Y > maxPoints[1])
-                {
-                    throw new Exception($"Oops! Position can not be beyond bounderies (0 , 0) and ({maxPoints[0]} , {maxPoints[1]})");
+                    switch (move)
+                    {
+                        case 'F':
+                        case 'f':
+                            this.MoveInF_Direction();
+                            break;
+                        case 'L':
+                        case 'l':
+                            this.MoveInL_Direction();
+                            break;
+                        case 'R':
+                        case 'r':
+                            this.MoveInR_Direction();
+                            break;
+                        default:
+                            Console.WriteLine($"Invalid Character {move}");
+                            Console.WriteLine($"Suggestion : Only used these 3 Charters [ F , L , R ] ");
+                            break;
+                    }
                 }
             }
         }

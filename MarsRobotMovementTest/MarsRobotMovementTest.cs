@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using MarsRobotMovement;
-using MarsRoverProblem;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MarsRobotMovementTest
@@ -8,45 +7,63 @@ namespace MarsRobotMovementTest
     [TestClass]
     public class MarsRobotMovementTest
     {
-        //Testing
         [TestMethod]
-        public void TestScanrio_12N_LMLMLMLMM()
+        public void TestCase_FFRFLFLF_14West()
         {
             Position position = new Position()
             {
                 X = 1,
-                Y = 2,
+                Y = 1,
                 Direction = Directions.North
             };
 
             var maxPoints = new List<int>() { 5, 5 };
-            var moves = "LMLMLMLMM";
+            var moves = "FFRFLFLF";
 
-            position.StartMoving(maxPoints, moves);
+            position.StartToMove(maxPoints, moves);
 
-            var actualOutput = $"{position.X} {position.Y} {position.Direction.ToString()}";
-            var expectedOutput = "1 3 N";
+            var actualOutput = position.X + " , " + position.Y + " , " + position.Direction.ToString();
+            var expectedOutput = "1 , 4 , West";
 
             Assert.AreEqual(expectedOutput, actualOutput);
         }
-
         [TestMethod]
-        public void TestScanrio_33E_MRRMMRMRRM()
+        public void TestCase_LFLFLFLFF_01West()
         {
             Position position = new Position()
             {
-                X = 3,
-                Y = 3,
-                Direction = Directions.East
+                X = 1,
+                Y = 1,
+                Direction = Directions.North
             };
 
             var maxPoints = new List<int>() { 5, 5 };
-            var moves = "MRRMMRMRRM";
+            var moves = "LFLFLFLFF";
 
-            position.StartMoving(maxPoints, moves);
+            position.StartToMove(maxPoints, moves);
 
-            var actualOutput = $"{position.X} {position.Y} {position.Direction.ToString()}";
-            var expectedOutput = "2 3 S";
+            var actualOutput = position.X + " , " + position.Y + " , " + position.Direction.ToString();
+            var expectedOutput = "0 , 1 , West";
+
+            Assert.AreEqual(expectedOutput, actualOutput);
+        }
+        [TestMethod]
+        public void TestCase_FRRFFRFRRF_10South()
+        {
+            Position position = new Position()
+            {
+                X = 1,
+                Y = 1,
+                Direction = Directions.North
+            };
+
+            var maxPoints = new List<int>() { 5, 5 };
+            var moves = "FRRFFRFRRF";
+
+            position.StartToMove(maxPoints, moves);
+
+            var actualOutput = position.X + " , " + position.Y + " , " + position.Direction.ToString();
+            var expectedOutput = "1 , 0 , South";
 
             Assert.AreEqual(expectedOutput, actualOutput);
         }

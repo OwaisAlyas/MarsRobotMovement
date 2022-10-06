@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace MarsRoverProblem
+namespace MarsRobotMovement
 {
     public class Program
     {
@@ -13,28 +13,23 @@ namespace MarsRoverProblem
             {
                 Console.WriteLine("Please Provide the Grid Size for Rebort Movement, such as 5*5, 3*4, etc");
                 var maxPoints = Console.ReadLine().Trim().Split('*').Select(int.Parse).ToList();
-                if (maxPoints.Count == 2)
+                if (maxPoints.Count == 2 && maxPoints[0]>0 && maxPoints[1]>0)
                 {
-                    var startPositions = new string[3];
                     Position position = new Position();
+                    position.X = 1;
+                    position.Y = 1;
+                    position.Direction = (Directions)Enum.Parse(typeof(Directions), Directions.North.ToString().ToString());
 
-                    if (startPositions.Count() == 3)
-                    {
-                        position.X = 1;
-                        position.Y = 1;
-                        position.Direction = (Directions)Enum.Parse(typeof(Directions), Directions.North.ToString().ToString());
-                    }
-
-                    Console.WriteLine("Please Provide the a string containing multiple commands as described below (Sample command string: LFLRFLFF)");
-                    Console.WriteLine("L --> Turn the robot left");
-                    Console.WriteLine("R --> Turn the robot right");
-                    Console.WriteLine("F --> Move forward on it's facing direction");
+                    Console.WriteLine("Please Provide the a string containing multiple commands as described below (Sample command string: FFRFLFLF )");
+                    Console.WriteLine("1) L --> Turn the robot left");
+                    Console.WriteLine("2) R --> Turn the robot right");
+                    Console.WriteLine("3) F --> Move forward on it's facing direction");
 
                     var moves = Console.ReadLine().ToUpper();
 
                     try
                     {
-                        position.StartMoving(maxPoints, moves);
+                        position.StartToMove(maxPoints, moves);
                         Console.WriteLine(position.X + " , " + position.Y + " , " + position.Direction.ToString());
                     }
                     catch (Exception ex)
